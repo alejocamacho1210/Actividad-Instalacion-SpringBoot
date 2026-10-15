@@ -1,4 +1,4 @@
-# Actividad práctica: Mi primer proyecto con Spring Boot
+# Actividad Instalación - Spring Boot
 
 **Estudiante:** Alejandro Camacho
 
