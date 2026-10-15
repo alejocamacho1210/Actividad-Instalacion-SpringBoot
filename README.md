@@ -50,48 +50,48 @@ capturas/                          -> evidencias de la actividad
 # Entregables
 
 ## 1. Estructura del proyecto en el IDE
-![Estructura del proyecto](01-estructura-proyecto.png)
+![Estructura del proyecto](holamundo/capturas/01-estructura-proyecto.png)
 
 ## 2. Consola con `Tomcat started on port ...`
-![Consola con Tomcat iniciado](02-consola-tomcat-started.png)
+![Consola con Tomcat iniciado](holamundo/capturas/02-consola-tomcat-started.png)
 
 ## 3. Respuestas en Postman (Status 200 OK)
 
 **`GET /api/hola`**
 
-> 📸 **Pendiente:** agregar captura. Guárdala como `capturas/05-postman-api-hola.png` y reemplaza esta línea por:
-> `![Postman /api/hola](capturas/05-postman-api-hola.png)`
+> 📸 **Pendiente:** agregar captura. Guárdala como `holamundo/capturas/05-postman-api-hola.png` y reemplaza esta línea por:
+> `![Postman /api/hola](holamundo/capturas/05-postman-api-hola.png)`
 
 **`GET /saludo`**
 
-![Postman /saludo](03-postman-saludo.png)
+![Postman /saludo](holamundo/capturas/03-postman-saludo.png)
 
 **`GET /config`**
 
-![Postman /config](04-postman-config.png)
+![Postman /config](holamundo/capturas/04-postman-config.png)
 
 ## 4. Respuestas en Insomnia (Status 200 OK)
 
 **`GET /api/hola`**
 
-> 📸 **Pendiente:** guarda la captura como `capturas/06-insomnia-api-hola.png` y reemplaza esta línea por:
-> `![Insomnia /api/hola](capturas/06-insomnia-api-hola.png)`
+> 📸 **Pendiente:** guarda la captura como `holamundo/capturas/06-insomnia-api-hola.png` y reemplaza esta línea por:
+> `![Insomnia /api/hola](holamundo/capturas/06-insomnia-api-hola.png)`
 
 **`GET /saludo`**
 
-> 📸 **Pendiente:** guarda la captura como `capturas/07-insomnia-saludo.png` y reemplaza esta línea por:
-> `![Insomnia /saludo](capturas/07-insomnia-saludo.png)`
+> 📸 **Pendiente:** guarda la captura como `holamundo/capturas/07-insomnia-saludo.png` y reemplaza esta línea por:
+> `![Insomnia /saludo](holamundo/capturas/07-insomnia-saludo.png)`
 
 **`GET /config`**
 
-> 📸 **Pendiente:** guarda la captura como `capturas/08-insomnia-config.png` y reemplaza esta línea por:
-> `![Insomnia /config](capturas/08-insomnia-config.png)`
+> 📸 **Pendiente:** guarda la captura como `holamundo/capturas/08-insomnia-config.png` y reemplaza esta línea por:
+> `![Insomnia /config](holamundo/capturas/08-insomnia-config.png)`
 
 ## 5. Reto: ¿qué pasa con un método equivocado?
 Al enviar un **POST** a `/api/hola` se obtiene **405 Method Not Allowed**, porque el controlador solo tiene `@GetMapping`. La URL y el método van juntos.
 
-> 📸 **Pendiente:** guarda la captura como `capturas/09-405-method-not-allowed.png` y reemplaza esta línea por:
-> `![405 Method Not Allowed](capturas/09-405-method-not-allowed.png)`
+> 📸 **Pendiente:** guarda la captura como `holamundo/capturas/09-405-method-not-allowed.png` y reemplaza esta línea por:
+> `![405 Method Not Allowed](holamundo/capturas/09-405-method-not-allowed.png)`
 
 ## 6. Reto: ¿para qué sirve `@Service`?
 Al comentar `@Service` en `MiServicio`, la aplicación **no arranca** y aparece un error como este:
@@ -103,8 +103,8 @@ of type 'MiServicio' that could not be found.
 
 Significa: "el controlador necesita un `MiServicio`, pero Spring no lo creó". Al volver a poner `@Service`, todo funciona.
 
-> 📸 **Pendiente:** guarda la captura como `capturas/10-error-sin-service.png` y reemplaza esta línea por:
-> `![Error sin @Service](capturas/10-error-sin-service.png)`
+> 📸 **Pendiente:** guarda la captura como `holamundo/capturas/10-error-sin-service.png` y reemplaza esta línea por:
+> `![Error sin @Service](holamundo/capturas/10-error-sin-service.png)`
 
 ## 7. Repositorio público en GitHub y DeepWiki
 - Repositorio: **pendiente** (pegar el enlace aquí)
@@ -114,3 +114,5 @@ Significa: "el controlador necesita un `MiServicio`, pero Spring no lo creó". A
 **¿Qué diferencia hay entre `@RestController` y `@Service`, y por qué Spring puede entregar el servicio al controlador sin usar `new`?**
 
 `@RestController` marca una clase como controlador web: recibe peticiones HTTP (por ejemplo `GET /saludo`) y devuelve la respuesta directamente como cuerpo, en texto o JSON. `@Service` marca una clase con la lógica de negocio y la registra como *bean* dentro del contenedor de Spring.
+
+Spring puede entregar el servicio al controlador sin `new` gracias a la inyección de dependencias. Al arrancar, escanea el paquete `com.ejemplo.holamundo`, crea un único objeto de `MiServicio` porque tiene `@Service` y lo pasa por el constructor de `SaludoController`. El controlador solo declara qué necesita y Spring se encarga de crearlo y entregarlo. Por eso, si se quita `@Service`, la aplicación no arranca: no existe ningún bean de tipo `MiServicio` para inyectar.
