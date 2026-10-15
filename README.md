@@ -50,10 +50,10 @@ capturas/                          -> evidencias de la actividad
 # Entregables
 
 ## 1. Estructura del proyecto en el IDE
-![Estructura del proyecto](capturas/01-estructura-proyecto.png)
+![Estructura del proyecto](01-estructura-proyecto.png)
 
 ## 2. Consola con `Tomcat started on port ...`
-![Consola con Tomcat iniciado](capturas/02-consola-tomcat-started.png)
+![Consola con Tomcat iniciado](02-consola-tomcat-started.png)
 
 ## 3. Respuestas en Postman (Status 200 OK)
 
@@ -64,11 +64,11 @@ capturas/                          -> evidencias de la actividad
 
 **`GET /saludo`**
 
-![Postman /saludo](capturas/03-postman-saludo.png)
+![Postman /saludo](03-postman-saludo.png)
 
 **`GET /config`**
 
-![Postman /config](capturas/04-postman-config.png)
+![Postman /config](04-postman-config.png)
 
 ## 4. Respuestas en Insomnia (Status 200 OK)
 
