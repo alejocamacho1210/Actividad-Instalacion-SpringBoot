@@ -101,8 +101,6 @@ Significa que el controlador necesita un `MiServicio`, pero Spring no lo creó. 
 Pendiente: agregar la captura como `holamundo/holamundo/capturas/10-error-sin-service.png`.
 
 ## 7. Repositorio público en GitHub y DeepWiki
-- Repositorio: [Actividad-Instalacion-SpringBoot](https://github.com/alejocamacho1210/Actividad-Instalacion-SpringBoot)
-- DeepWiki: [Actividad-Instalacion-SpringBoot](https://deepwiki.com/alejocamacho1210/Actividad-Instalacion-SpringBoot)
 
 ## 8. Respuesta breve
 **¿Qué diferencia hay entre `@RestController` y `@Service`, y por qué Spring puede entregar el servicio al controlador sin usar `new`?**
