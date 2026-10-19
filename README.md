@@ -59,34 +59,34 @@ capturas/                          -> evidencias de la actividad
 
 **`GET /api/hola`**
 
-Pendiente: agregar captura como `holamundo/holamundo/capturas/05-postman-api-hola.png`.
+![Postman GET /api/hola](holamundo/holamundo/capturas/03-postman-holamundo.png)
 
 **`GET /saludo`**
 
-![Postman /saludo](holamundo/holamundo/capturas/03-postman-saludo.png)
+![Postman GET /saludo](holamundo/holamundo/capturas/04-postman-saludo.png)
 
 **`GET /config`**
 
-![Postman /config](holamundo/holamundo/capturas/04-postman-config.png)
+![Postman GET /config](holamundo/holamundo/capturas/05-postman-config.png)
 
-## 4. Respuestas en Insomnia (Status 200 OK)
+## 4. Reto: ¿qué pasa con un método equivocado?
+Al enviar un **POST** a `/api/hola` se obtiene **405 Method Not Allowed**, porque el controlador solo tiene `@GetMapping`. La URL y el método van juntos.
+
+![Postman POST /api/hola: 405 Method Not Allowed](holamundo/holamundo/capturas/06-postman-post-405.png)
+
+## 5. Respuestas en Insomnia (Status 200 OK)
 
 **`GET /api/hola`**
 
-Pendiente: agregar captura como `holamundo/holamundo/capturas/06-insomnia-api-hola.png`.
+Pendiente de añadir la captura: `holamundo/holamundo/capturas/07-insomnia-api-hola.png`.
 
 **`GET /saludo`**
 
-Pendiente: agregar captura como `holamundo/holamundo/capturas/07-insomnia-saludo.png`.
+Pendiente de añadir la captura: `holamundo/holamundo/capturas/08-insomnia-saludo.png`.
 
 **`GET /config`**
 
-Pendiente: agregar captura como `holamundo/holamundo/capturas/08-insomnia-config.png`.
-
-## 5. Reto: ¿qué pasa con un método equivocado?
-Al enviar un **POST** a `/api/hola` se obtiene **405 Method Not Allowed**, porque el controlador solo tiene `@GetMapping`. La URL y el método van juntos.
-
-Pendiente: agregar la captura como `holamundo/holamundo/capturas/09-405-method-not-allowed.png`.
+Pendiente de añadir la captura: `holamundo/holamundo/capturas/09-insomnia-config.png`.
 
 ## 6. Reto: ¿para qué sirve `@Service`?
 Al quitar temporalmente `@Service` en `MiServicio`, la aplicación no arranca y aparece un error como este:
@@ -98,7 +98,7 @@ of type 'MiServicio' that could not be found.
 
 Significa que el controlador necesita un `MiServicio`, pero Spring no lo creó. Al volver a poner `@Service`, todo funciona.
 
-Pendiente: agregar la captura como `holamundo/holamundo/capturas/10-error-sin-service.png`.
+Pendiente de añadir la captura: `holamundo/holamundo/capturas/10-error-sin-service.png`.
 
 ## 7. Respuesta breve
 **¿Qué diferencia hay entre `@RestController` y `@Service`, y por qué Spring puede entregar el servicio al controlador sin usar `new`?**
