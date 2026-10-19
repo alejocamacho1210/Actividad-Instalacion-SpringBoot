@@ -100,9 +100,7 @@ Significa que el controlador necesita un `MiServicio`, pero Spring no lo creó. 
 
 Pendiente: agregar la captura como `holamundo/holamundo/capturas/10-error-sin-service.png`.
 
-## 7. Repositorio público en GitHub y DeepWiki
-
-## 8. Respuesta breve
+## 7. Respuesta breve
 **¿Qué diferencia hay entre `@RestController` y `@Service`, y por qué Spring puede entregar el servicio al controlador sin usar `new`?**
 
 `@RestController` marca una clase como controlador web: recibe peticiones HTTP (por ejemplo `GET /saludo`) y devuelve la respuesta directamente como cuerpo, en texto o JSON. `@Service` marca una clase con la lógica de negocio y la registra como *bean* dentro del contenedor de Spring.
