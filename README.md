@@ -2,117 +2,161 @@
 
 **Estudiante:** Alejandro Camacho
 
-Aplicación Spring Boot (Maven, Java 17+) con tres endpoints REST que aplica controladores, servicios, inyección de dependencias y configuración externa.
+Aplicación de consola web desarrollada con Spring Boot y Maven. Incluye tres endpoints REST para practicar controladores, servicios, inyección de dependencias y configuración externa.
 
 ## Tecnologías
-- Java 17+
-- Spring Boot 4.0.0 (Spring Web MVC)
-- Maven
-- IDE: NetBeans
-- Pruebas: Postman e Insomnia
 
-## Ejecutar
+- Java 17 o superior
+- Spring Boot 4.0.0
+- Spring Web MVC y Tomcat
+- Maven
+- NetBeans
+- Postman e Insomnia para pruebas HTTP
+
+## Requisitos previos
+
+- JDK instalado
+- Maven instalado
+- Proyecto descargado o clonado
+- Postman e Insomnia para completar las evidencias solicitadas
+
+## Cómo ejecutar el proyecto
+
+Desde la terminal, entra en la carpeta que contiene el archivo `pom.xml` y ejecuta:
+
 ```bash
 mvn spring-boot:run
 ```
-O desde el IDE: botón ▶ junto a `HolamundoApplication`. Por defecto la app queda en `http://localhost:8080`. Si el puerto está ocupado:
+
+Por defecto, Spring Boot intenta iniciar en el puerto 8080. En este equipo ese puerto estaba ocupado, por lo que se utilizó el puerto 8082:
+
 ```bash
 mvn spring-boot:run -Dspring-boot.run.arguments=--server.port=8082
 ```
 
+Mantén abierta la terminal mientras haces las pruebas. Si usas el puerto 8082, utiliza esa dirección en Postman e Insomnia.
+
 ## Endpoints
-| Método | Endpoint | Status | Respuesta |
-|---|---|---|---|
-| GET | `/api/hola` | 200 OK | ¡Hola Mundo desde Spring Boot! |
-| GET | `/saludo` | 200 OK | ¡Hola desde el servicio! |
-| GET | `/config` | 200 OK | ¡Bienvenido a Spring Boot! |
+
+| Método | URL local (puerto 8082) | Resultado esperado |
+|---|---|---|
+| GET | `http://localhost:8082/api/hola` | `200 OK` — ¡Hola Mundo desde Spring Boot! |
+| GET | `http://localhost:8082/saludo` | `200 OK` — ¡Hola desde el servicio! |
+| GET | `http://localhost:8082/config` | `200 OK` — ¡Bienvenido a Spring Boot! |
+| POST | `http://localhost:8082/api/hola` | `405 Method Not Allowed`, porque el endpoint solo admite GET |
+
+Si la aplicación se inicia en otro puerto, reemplaza `8082` por el puerto que indique la consola.
 
 ## Estructura del proyecto
-```
+
+```text
 src/main/java/com/ejemplo/holamundo/
 ├── HolamundoApplication.java
 ├── controller/
-│   ├── HolaMundoController.java   -> /api/hola
-│   ├── SaludoController.java      -> /saludo (usa MiServicio por inyección)
-│   └── ConfigController.java      -> /config (usa @Value)
-└── service/MiServicio.java        -> @Service
-src/main/resources/application.properties
-capturas/                          -> evidencias de la actividad
+│   ├── HolaMundoController.java
+│   ├── SaludoController.java
+│   └── ConfigController.java
+└── service/
+    └── MiServicio.java
+
+src/main/resources/
+└── application.properties
 ```
 
+- `HolaMundoController`: expone `GET /api/hola`.
+- `SaludoController`: expone `GET /saludo` y recibe `MiServicio` mediante inyección de dependencias.
+- `ConfigController`: expone `GET /config` y obtiene el mensaje desde la configuración.
+- `MiServicio`: proporciona el saludo y se registra en Spring mediante `@Service`.
+- `application.properties`: contiene la propiedad `mensaje.bienvenida`.
+
 ## Conceptos aplicados
-- `@RestController` / `@GetMapping`: exponen los endpoints.
-- `@Service` + inyección por constructor: Spring crea `MiServicio` y lo entrega al controlador sin `new`.
-- `@Value`: lee `mensaje.bienvenida` desde `application.properties`.
 
----
+- **`@RestController`:** declara un controlador web que responde a peticiones HTTP.
+- **`@GetMapping`:** asocia una ruta con peticiones GET.
+- **`@Service`:** registra la clase de servicio como un bean administrado por Spring.
+- **Inyección por constructor:** permite que Spring entregue `MiServicio` a `SaludoController` sin crear la instancia manualmente con `new`.
+- **`@Value`:** permite leer el valor de `mensaje.bienvenida` desde `application.properties`.
 
-# Entregables
+## Evidencias de la actividad
 
-## 1. Estructura del proyecto en el IDE
+Guarda las capturas dentro de la carpeta `capturas` del proyecto y conserva los nombres indicados abajo. Las imágenes deben ser capturas reales de tu aplicación; no se deben reemplazar por imágenes inventadas.
+
+### 1. Estructura del proyecto en el IDE
+
+Archivo: `01-estructura-proyecto.png`
+
 ![Estructura del proyecto](holamundo/holamundo/capturas/01-estructura-proyecto.png)
 
-## 2. Consola con `Tomcat started on port ...`
+### 2. Consola con Tomcat iniciado
+
+Archivo: `02-consola-tomcat-started.png`
+
+La captura debe mostrar la línea `Tomcat started on port 8082 (http)` si estás ejecutando la aplicación en ese puerto.
+
 ![Consola con Tomcat iniciado](holamundo/holamundo/capturas/02-consola-tomcat-started.png)
 
-## 3. Respuestas en Postman (Status 200 OK)
+### 3. Pruebas en Postman
 
-**`GET /api/hola`**
+- [ ] `GET /api/hola` — guardar como `05-postman-api-hola.png`.
+- [ ] `GET /saludo` — guardar como `03-postman-saludo.png`.
+- [ ] `GET /config` — guardar como `04-postman-config.png`.
 
-> 📸 **Pendiente:** agregar captura. Guárdala como `holamundo/holamundo/capturas/05-postman-api-hola.png` y reemplaza esta línea por:
-> `![Postman /api/hola](holamundo/holamundo/capturas/05-postman-api-hola.png)`
-
-**`GET /saludo`**
+Cada captura debe mostrar la URL, el método GET, el código de estado `200 OK` y la respuesta.
 
 ![Postman /saludo](holamundo/holamundo/capturas/03-postman-saludo.png)
 
-**`GET /config`**
-
 ![Postman /config](holamundo/holamundo/capturas/04-postman-config.png)
 
-## 4. Respuestas en Insomnia (Status 200 OK)
+### 4. Pruebas en Insomnia
 
-**`GET /api/hola`**
+- [ ] `GET /api/hola` — guardar como `06-insomnia-api-hola.png`.
+- [ ] `GET /saludo` — guardar como `07-insomnia-saludo.png`.
+- [ ] `GET /config` — guardar como `08-insomnia-config.png`.
 
-> 📸 **Pendiente:** guarda la captura como `holamundo/holamundo/capturas/06-insomnia-api-hola.png` y reemplaza esta línea por:
-> `![Insomnia /api/hola](holamundo/holamundo/capturas/06-insomnia-api-hola.png)`
+Cada captura debe mostrar la URL, el método GET, el código de estado `200 OK` y la respuesta. Insomnia presentó un error gráfico al abrirse en el equipo, así que estas evidencias quedan pendientes hasta conseguir que la aplicación se ejecute correctamente.
 
-**`GET /saludo`**
+### 5. Reto: enviar un método HTTP incorrecto
 
-> 📸 **Pendiente:** guarda la captura como `holamundo/holamundo/capturas/07-insomnia-saludo.png` y reemplaza esta línea por:
-> `![Insomnia /saludo](holamundo/holamundo/capturas/07-insomnia-saludo.png)`
+Envía una petición **POST** a `http://localhost:8082/api/hola`. Como la ruta está declarada para GET, el resultado esperado es `405 Method Not Allowed`.
 
-**`GET /config`**
+- [ ] Guardar la captura como `09-405-method-not-allowed.png`.
 
-> 📸 **Pendiente:** guarda la captura como `holamundo/holamundo/capturas/08-insomnia-config.png` y reemplaza esta línea por:
-> `![Insomnia /config](holamundo/holamundo/capturas/08-insomnia-config.png)`
+### 6. Reto: quitar temporalmente `@Service`
 
-## 5. Reto: ¿qué pasa con un método equivocado?
-Al enviar un **POST** a `/api/hola` se obtiene **405 Method Not Allowed**, porque el controlador solo tiene `@GetMapping`. La URL y el método van juntos.
+1. Abre `MiServicio.java` y comenta o elimina temporalmente la anotación `@Service`.
+2. Intenta iniciar la aplicación.
+3. Captura el error de arranque que indica que no se encontró un bean de tipo `MiServicio`.
+4. **Vuelve a poner `@Service`** y comprueba que la aplicación arranca normalmente.
 
-> 📸 **Pendiente:** guarda la captura como `holamundo/holamundo/capturas/09-405-method-not-allowed.png` y reemplaza esta línea por:
-> `![405 Method Not Allowed](holamundo/holamundo/capturas/09-405-method-not-allowed.png)`
+El mensaje puede ser similar a:
 
-## 6. Reto: ¿para qué sirve `@Service`?
-Al comentar `@Service` en `MiServicio`, la aplicación **no arranca** y aparece un error como este:
-
-```
+```text
 Parameter 0 of constructor in SaludoController required a bean
 of type 'MiServicio' that could not be found.
 ```
 
-Significa: "el controlador necesita un `MiServicio`, pero Spring no lo creó". Al volver a poner `@Service`, todo funciona.
+- [ ] Guardar la captura como `10-error-sin-service.png`.
+- [ ] Verificar que `@Service` quedó restaurado antes de terminar.
 
-> 📸 **Pendiente:** guarda la captura como `holamundo/holamundo/capturas/10-error-sin-service.png` y reemplaza esta línea por:
-> `![Error sin @Service](holamundo/holamundo/capturas/10-error-sin-service.png)`
+## Repositorio y documentación
 
-## 7. Repositorio público en GitHub y DeepWiki
-- Repositorio: **pendiente** (pegar el enlace aquí)
-- DeepWiki: **pendiente** (pegar el enlace aquí)
+- **GitHub:** [Actividad-Instalacion-SpringBoot](https://github.com/alejocamacho1210/Actividad-Instalacion-SpringBoot)
+- **DeepWiki:** [Abrir el repositorio en DeepWiki](https://deepwiki.com/alejocamacho1210/Actividad-Instalacion-SpringBoot)
 
-## 8. Respuesta breve
-**¿Qué diferencia hay entre `@RestController` y `@Service`, y por qué Spring puede entregar el servicio al controlador sin usar `new`?**
+Si DeepWiki todavía no muestra el contenido, abre el enlace y sigue el proceso que solicite para indexar el repositorio.
 
-`@RestController` marca una clase como controlador web: recibe peticiones HTTP (por ejemplo `GET /saludo`) y devuelve la respuesta directamente como cuerpo, en texto o JSON. `@Service` marca una clase con la lógica de negocio y la registra como *bean* dentro del contenedor de Spring.
+## Pregunta: ¿qué diferencia hay entre `@RestController` y `@Service`?
 
-Spring puede entregar el servicio al controlador sin `new` gracias a la inyección de dependencias. Al arrancar, escanea el paquete `com.ejemplo.holamundo`, crea un único objeto de `MiServicio` porque tiene `@Service` y lo pasa por el constructor de `SaludoController`. El controlador solo declara qué necesita y Spring se encarga de crearlo y entregarlo. Por eso, si se quita `@Service`, la aplicación no arranca: no existe ningún bean de tipo `MiServicio` para inyectar.
+`@RestController` identifica una clase que atiende solicitudes web y devuelve la respuesta HTTP. `@Service` identifica una clase que contiene lógica de servicio y permite que Spring la registre como un bean.
+
+Spring puede entregar `MiServicio` a `SaludoController` mediante inyección de dependencias. Al iniciar, Spring detecta la anotación `@Service`, crea el bean y lo proporciona al constructor del controlador. Si se elimina la anotación y no existe otra forma de registrar ese bean, Spring no encuentra la dependencia requerida y la aplicación no puede arrancar.
+
+## Lista final de comprobación
+
+- [ ] Confirmar que la aplicación inicia correctamente.
+- [ ] Completar las tres capturas de Postman.
+- [ ] Completar las tres capturas de Insomnia.
+- [ ] Guardar la captura del error 405.
+- [ ] Guardar la captura del error al retirar `@Service`.
+- [ ] Restaurar `@Service` y comprobar de nuevo el arranque.
+- [ ] Revisar que las imágenes estén subidas al repositorio y se vean en este README.
